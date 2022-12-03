@@ -44,12 +44,7 @@ public class Main {
                     }
                 }
                 //part two
-                // X - lose
-                // Y - draw
-                // Z - win
-                // A - rock
-                // B - paper
-                // C - scisors
+
                 if(me=='X'){
                     if(elf == 'A'){
                         pktSum2 += 0 + 3;
