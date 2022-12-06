@@ -18,6 +18,7 @@ public class Main {
             int lineNumber = 1;
             List<Stack> listOfStack = new ArrayList<>();
             List<List> instructions = new ArrayList<>();
+            //Setup
             while (line != null) {
                 if (lineNumber < 9) {
                     int index = 1;
@@ -47,6 +48,7 @@ public class Main {
                 }
                 listOfStack.add(stack);
             }
+
             //part 1
 //            for(List inst: instructions){
 //                for(int i = 0; i < Integer.parseInt((String) inst.get(0)); i++){
@@ -70,12 +72,8 @@ public class Main {
                 System.out.print(in.peek());
             }
 
-
-            System.out.println("konic");
-
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 }
-//1 5 9 13 17 21 25 29 33
