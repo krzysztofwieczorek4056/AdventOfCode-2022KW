@@ -75,5 +75,23 @@ public class Folder {
         }
         return smalest;
     }
+
+    @Override
+    public String toString() {
+        return this.patch;
+    }
+
+    public String printTree() {
+        return printRecurse(this, 0);
+    }
+    private static String printRecurse(Folder node, int level) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(new String(new char[level * 2]).replace("\0", " "))
+                .append(node.toString()).append("\n");
+        for (Folder child : node.folders) {
+            sb.append(printRecurse(child, level + 1));
+        }
+        return sb.toString();
+    }
 }
 

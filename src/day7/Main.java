@@ -32,6 +32,7 @@ public class Main {
         }
         System.out.println("Part 1: " + root.getDirAndSubDirSize());
         System.out.println("Part 2: " + root.getSmalest(root.getDirs()));
+        System.out.println(root.printTree());
     }
 
     public static boolean isNumeric(String strNum) {
