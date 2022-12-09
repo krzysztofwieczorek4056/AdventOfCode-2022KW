@@ -73,7 +73,6 @@ public class Main {
 
     private static void part2(List<String> list) {
         int[][] tab = new int[list.size()][list.get(0).length()];
-        int visible = 0;
         for (int i = 0; i < list.size(); i++) {
             for (int j = 0; j < tab[0].length; j++) {
                 tab[i][j] = Integer.parseInt(String.valueOf(list.get(i).charAt(j)));
