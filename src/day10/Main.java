@@ -17,7 +17,7 @@ public class Main {
             e.printStackTrace();
         }
         day10part1(list);
-        //day10part2(list);
+        day10part2(list);
 
     }
 
@@ -68,7 +68,7 @@ public class Main {
             if (i == value || i == value + 1 || i == value - 1) {
                 sprite[i] = '#';
             } else {
-                sprite[i] = '.';
+                sprite[i] = ' ';
             }
         }
         return sprite;

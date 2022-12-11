@@ -79,7 +79,6 @@ public class Main {
 
         }
         List<Point> listDistinct = visited.stream().distinct().collect(Collectors.toList());
-
         System.out.println(listDistinct.size());
     }
 
