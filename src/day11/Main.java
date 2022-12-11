@@ -2,10 +2,10 @@ package day11;
 
 import java.io.File;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
-import java.math.BigInteger;
 
 public class Main {
     public static void main(String[] args) {
@@ -22,7 +22,7 @@ public class Main {
 
     private static void day11part1(List<String> list) {
         List<Monkey> monkeyList = makeMonkey(list);
-        int [] monkeyIntrest = new int[monkeyList.size()];
+        long[] monkeyIntrest = new long[monkeyList.size()];
         for (int j = 0; j < 20; j++) {
             for (Monkey monkey : monkeyList) {
                 int itemSize = monkey.getItemsSize();
@@ -38,39 +38,41 @@ public class Main {
         }
         findMonkeyBusiness(monkeyIntrest);
     }
+
     private static void day11part2(List<String> list) {
-        BigInteger worryLevel = BigInteger.valueOf(0);
+        //BigInteger worryLevel = BigInteger.valueOf(0);
         List<Monkey> monkeyList = makeMonkey(list);
-        int [] monkeyIntrest = new int[monkeyList.size()];
-        for (int j = 1; j < 10001 ; j++) {
+        long[] monkeyIntrest = new long[monkeyList.size()];
+        long common = monkeyList.stream().mapToLong(Monkey::getTest).reduce(1, (a, b) -> a * b);
+        for (int j = 0; j < 10000; j++) {
             for (Monkey monkey : monkeyList) {
                 int itemSize = monkey.getItemsSize();
                 for (int i = 0; i < itemSize; i++) {
                     monkeyIntrest[monkey.getNumber()]++;
-                    worryLevel = monkey.getWorryLevel(monkey.getFirstItem());
-                    monkeyList.get(monkey.testThrow(worryLevel)).throwItem(worryLevel);
+                    BigInteger worryLevel = monkey.getWorryLevel(monkey.getFirstItem().remainder(BigInteger.valueOf(common)));
+                    long monkeyToThrow = monkey.testThrow(worryLevel);
+                    monkeyList.get((int) monkeyToThrow).throwItem(worryLevel);
                 }
             }
-                System.out.println("Round " + j);
         }
         findMonkeyBusiness(monkeyIntrest);
     }
 
-    private static void findMonkeyBusiness(int[] monkeyIntrest) {
-        int largestA = monkeyIntrest[0];
-        int largestB = -1;
 
-        for(int i = 0; i < monkeyIntrest.length; i++){
+    private static void findMonkeyBusiness(long[] monkeyIntrest) {
+        long largestA = monkeyIntrest[0];
+        long largestB = -1;
 
-            if(monkeyIntrest[i] > largestA){
+        for (int i = 0; i < monkeyIntrest.length; i++) {
+
+            if (monkeyIntrest[i] > largestA) {
                 largestB = largestA;
                 largestA = monkeyIntrest[i];
-            }
-            else if (monkeyIntrest[i] > largestB && monkeyIntrest[i] != largestA) {
+            } else if (monkeyIntrest[i] > largestB && monkeyIntrest[i] != largestA) {
                 largestB = monkeyIntrest[i];
             }
         }
-        System.out.println("MonkeyBusiness - " + largestA* largestB);
+        System.out.println("MonkeyBusiness - " + BigInteger.valueOf(largestA).multiply(BigInteger.valueOf(largestB)));
     }
 
     private static List<Monkey> makeMonkey(List<String> list) {
@@ -108,5 +110,23 @@ public class Main {
         return monkeyList;
     }
 
+    static int gcd(int a, int b) {
+        if (a == 0) return b;
+        return gcd(b % a, a);
+    }
 
+    // Function to find gcd of array of
+    // numbers
+    static int findGCD(List<BigInteger> arr, int n) {
+        int result = arr.get(0).intValue();
+        for (BigInteger element : arr) {
+            result = gcd(result, element.intValue());
+
+            if (result == 1) {
+                return 1;
+            }
+        }
+
+        return result;
+    }
 }
