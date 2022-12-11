@@ -40,7 +40,6 @@ public class Main {
     }
 
     private static void day11part2(List<String> list) {
-        //BigInteger worryLevel = BigInteger.valueOf(0);
         List<Monkey> monkeyList = makeMonkey(list);
         long[] monkeyIntrest = new long[monkeyList.size()];
         long common = monkeyList.stream().mapToLong(Monkey::getTest).reduce(1, (a, b) -> a * b);
@@ -108,25 +107,5 @@ public class Main {
             }
         }
         return monkeyList;
-    }
-
-    static int gcd(int a, int b) {
-        if (a == 0) return b;
-        return gcd(b % a, a);
-    }
-
-    // Function to find gcd of array of
-    // numbers
-    static int findGCD(List<BigInteger> arr, int n) {
-        int result = arr.get(0).intValue();
-        for (BigInteger element : arr) {
-            result = gcd(result, element.intValue());
-
-            if (result == 1) {
-                return 1;
-            }
-        }
-
-        return result;
     }
 }

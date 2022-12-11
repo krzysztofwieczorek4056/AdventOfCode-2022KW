@@ -29,19 +29,45 @@ public class Monkey {
         }
     }
 
-    static long gcd2(long a, long b) {
-        while (b > 0) {
-            long temp = b;
-            b = a % b; // % is remainder
-            a = temp;
-        }
-        return a;
+    @Override
+    public String toString() {
+        return "Monkey{" + "monkeyNumber=" + monkeyNumber + ", startingItems=" + startingItems + ", operation='" + operation + '\'' + ", test=" + test + ", monkeyOption1=" + monkeyOption1 + ", monkeyOption2=" + monkeyOption2 + '}';
     }
 
-    static long gcd(List<BigInteger> input) {
-        long result = input.get(0).longValue();
-        for (int i = 1; i < input.size(); i++) result = gcd2(result, input.get(1).longValue());
-        return result;
+    public BigInteger getFirstItem() {
+        BigInteger item = this.startingItems.get(0);
+        this.startingItems.remove(0);
+        return item;
+    }
+
+    public int getItemsSize() {
+        return this.startingItems.size();
+    }
+
+    public BigInteger getWorryLevel(BigInteger item) {
+        if (this.operation.contains("old * old")) {
+            return item.pow(2);
+        } else if (this.operation.contains("old *")) {
+            return item.multiply(this.value);
+        } else {
+            return item.add(this.value);
+        }
+    }
+
+    public int testThrow(BigInteger worryLevel) {
+        if (worryLevel.mod(BigInteger.valueOf(this.test)).equals(BigInteger.ZERO)) {
+            return monkeyOption1;
+        } else {
+            return monkeyOption2;
+        }
+    }
+
+    public void throwItem(BigInteger item) {
+        this.startingItems.add(item);
+    }
+
+    public int getNumber() {
+        return this.monkeyNumber;
     }
 
     public int getMonkeyNumber() {
@@ -100,54 +126,4 @@ public class Monkey {
         this.value = value;
     }
 
-    @Override
-    public String toString() {
-        return "Monkey{" + "monkeyNumber=" + monkeyNumber + ", startingItems=" + startingItems + ", operation='" + operation + '\'' + ", test=" + test + ", monkeyOption1=" + monkeyOption1 + ", monkeyOption2=" + monkeyOption2 + '}';
-    }
-
-    public BigInteger getFirstItem() {
-        BigInteger item = this.startingItems.get(0);
-        this.startingItems.remove(0);
-        return item;
-    }
-
-    public int getItemsSize() {
-        return this.startingItems.size();
-    }
-
-    public BigInteger getWorryLevel(BigInteger item) {
-        if (this.operation.contains("old * old")) {
-            return item.pow(2);
-        } else if (this.operation.contains("old *")) {
-            return item.multiply(this.value);
-        } else {
-            return item.add(this.value);
-        }
-    }
-
-    public int testThrow(BigInteger worryLevel) {
-        if (worryLevel.mod(BigInteger.valueOf(this.test)).equals(BigInteger.ZERO)) {
-            return monkeyOption1;
-        } else {
-            return monkeyOption2;
-        }
-    }
-
-    public void throwItem(BigInteger item) {
-        this.startingItems.add(item);
-    }
-
-    public int getNumber() {
-        return this.monkeyNumber;
-    }
-
-    public void lowerNumbers(BigInteger gcd) {
-        int n = this.startingItems.size();
-        if (n > 0 && gcd.intValue() > 0) {
-            for (int i = 0; i < this.startingItems.size(); i++) {
-                this.startingItems.set(i, this.startingItems.get(i).mod(gcd));
-            }
-        }
-
-    }
 }
