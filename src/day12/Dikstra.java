@@ -5,8 +5,8 @@ import java.util.*;
 
 class Dikstra {
 
-    static int pathExists(char[][] matrix) {
-        Node source = getNode(matrix);
+    static int pathExists(char[][] matrix, Node node) {
+        Node source = node;
         Set<Node> queue = new LinkedHashSet<>();
 
         int numOfRows = matrix.length;
@@ -14,6 +14,9 @@ class Dikstra {
         queue.add(source);
         Iterator<Node> it = queue.iterator();
         while (!queue.isEmpty()) {
+            if(!it.hasNext()){
+                return 1000;
+            }
             Node poped = it.next();
             if (matrix[poped.x][poped.y] == 'E') {
                 return poped.distanceFromSource;
@@ -30,19 +33,7 @@ class Dikstra {
         return -1;
     }
 
-    private static Node getNode(char[][] matrix) {
-        int x = 0;
-        int y = 0;
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[i].length; j++) {
-                if (matrix[i][j] == 'S') {
-                    x = i;
-                    y = j;
-                }
-            }
-        }
-        return new Node(x, y, 0, 'a');
-    }
+
 
     private static List<Node> addNeighbours(Node poped, char[][] matrix, final int numOfRows, final int numOfColumns) {
 
