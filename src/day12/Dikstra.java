@@ -51,23 +51,23 @@ class Dikstra {
 
         List<Node> list = new LinkedList<>();
 
-        if ((poped.x - 1 >= 0 && poped.x - 1 < numOfRows) && isGoodElevation(poped, matrix, poped.x - 1, poped.y)) {
+        if ((poped.x - 1 >= 0 && poped.x - 1 < numOfRows) && isGoodElevation(poped.value, matrix, poped.x - 1, poped.y)) {
             list.add(new Node(poped.x - 1, poped.y, poped.distanceFromSource + 1, matrix[poped.x - 1][poped.y]));
         }
-        if ((poped.x + 1 >= 0 && poped.x + 1 < numOfRows) && isGoodElevation(poped, matrix, poped.x + 1, poped.y)) {
+        if ((poped.x + 1 >= 0 && poped.x + 1 < numOfRows) && isGoodElevation(poped.value, matrix, poped.x + 1, poped.y)) {
             list.add(new Node(poped.x + 1, poped.y, poped.distanceFromSource + 1, matrix[poped.x + 1][poped.y]));
         }
-        if ((poped.y - 1 >= 0 && poped.y - 1 < numOfColumns) && isGoodElevation(poped, matrix, poped.x, poped.y - 1)) {
+        if ((poped.y - 1 >= 0 && poped.y - 1 < numOfColumns) && isGoodElevation(poped.value, matrix, poped.x, poped.y - 1)) {
             list.add(new Node(poped.x, poped.y - 1, poped.distanceFromSource + 1, matrix[poped.x][poped.y - 1]));
         }
-        if ((poped.y + 1 >= 0 && poped.y + 1 < numOfColumns) && isGoodElevation(poped, matrix, poped.x, poped.y + 1)) {
+        if ((poped.y + 1 >= 0 && poped.y + 1 < numOfColumns) && isGoodElevation(poped.value, matrix, poped.x, poped.y + 1)) {
             list.add(new Node(poped.x, poped.y + 1, poped.distanceFromSource + 1, matrix[poped.x][poped.y + 1]));
         }
 
         return list;
     }
 
-    private static boolean isGoodElevation(Node poped, char[][] matrix, int x, int y) {
-        return matrix[x][y] - poped.value == 1 || matrix[x][y] - poped.value == 0 || (matrix[x][y] - poped.value < 0 && matrix[x][y] - poped.value > -26) || (matrix[x][y] == 'E' && poped.value == 'z');
+    private static boolean isGoodElevation(char value, char[][] matrix, int x, int y) {
+        return matrix[x][y] - value == 1 || matrix[x][y] - value == 0 || (matrix[x][y] - value < 0 && matrix[x][y] - value > -26) || (matrix[x][y] == 'E' && value == 'z');
     }
 }

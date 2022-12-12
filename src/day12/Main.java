@@ -22,11 +22,8 @@ public class Main {
         for (int i = 0; i < list.size(); i++) {
             map[i] = list.get(i).toCharArray();
         }
-
-
         int path = Dikstra.pathExists(map);
         System.out.println(path);
-
     }
 
 }
