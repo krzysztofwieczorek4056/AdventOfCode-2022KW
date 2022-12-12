@@ -9,8 +9,17 @@ import java.util.List;
 class Dikstra {
 
     static int pathExists(char[][] matrix) {
-
-        Node source = new Node(0, 0, 0, 'a');
+        int x = 0;
+        int y = 0;
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                if(matrix[i][j] == 'S'){
+                    x=i;
+                    y=j;
+                }
+            }
+        }
+        Node source = new Node(x, y, 0, 'a');
         HashSet<Node> queue = new HashSet<>();
 
         int numOfRows = matrix.length;
