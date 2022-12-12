@@ -14,17 +14,24 @@ class Node {
     }
     @Override
     public boolean equals(Object other) {
-        if (!(other instanceof Node)) {
-            return false;
-        }
-        if(x == ((Node) other).x &&y == ((Node) other).y){
+        if (this == other)
             return true;
-        }
-        return false;
+        if (other == null)
+            return false;
+        if (getClass() != other.getClass())
+            return false;
+        final Node some = (Node) other;
+        if (x != some.x)
+            return false;
+        return y == some.y;
     }
 
     @Override
     public int hashCode() {
-        return x * 31 + y;
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + x;
+        result = prime * result + y;
+        return result;
     }
 }

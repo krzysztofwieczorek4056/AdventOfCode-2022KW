@@ -13,9 +13,9 @@ class Dikstra {
         int y = 0;
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[i].length; j++) {
-                if(matrix[i][j] == 'S'){
-                    x=i;
-                    y=j;
+                if (matrix[i][j] == 'S') {
+                    x = i;
+                    y = j;
                 }
             }
         }
@@ -45,7 +45,7 @@ class Dikstra {
 
     private static List<Node> addNeighbours(Node poped, char[][] matrix, final int numOfRows, final int numOfColumns) {
 
-        List<Node> list = new LinkedList<Node>();
+        List<Node> list = new LinkedList<>();
 
         if ((poped.x - 1 >= 0 && poped.x - 1 < numOfRows) && (matrix[poped.x - 1][poped.y] - poped.value == 1 || matrix[poped.x - 1][poped.y] - poped.value == 0 || (matrix[poped.x - 1][poped.y] - poped.value < 0 && matrix[poped.x - 1][poped.y] - poped.value > -26) || (matrix[poped.x - 1][poped.y] == 'E' && poped.value == 'z'))) {
             list.add(new Node(poped.x - 1, poped.y, poped.distanceFromSource + 1, matrix[poped.x - 1][poped.y]));
