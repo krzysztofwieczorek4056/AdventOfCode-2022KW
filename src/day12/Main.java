@@ -17,6 +17,8 @@ public class Main {
         part1FindPath(list);
     }
 
+
+
     private static void part1FindPath(List<String> list) {
         char[][] map = new char[list.size()][list.get(0).length()];
         for (int i = 0; i < list.size(); i++) {

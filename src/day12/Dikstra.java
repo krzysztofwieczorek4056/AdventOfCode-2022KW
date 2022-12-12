@@ -1,16 +1,13 @@
 package day12;
 
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 
 class Dikstra {
 
     static int pathExists(char[][] matrix) {
         Node source = getNode(matrix);
-        HashSet<Node> queue = new HashSet<>();
+        Set<Node> queue = new LinkedHashSet<>();
 
         int numOfRows = matrix.length;
         int numOfColumns = matrix[0].length;
