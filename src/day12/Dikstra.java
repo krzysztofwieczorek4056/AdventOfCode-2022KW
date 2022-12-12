@@ -9,17 +9,7 @@ import java.util.List;
 class Dikstra {
 
     static int pathExists(char[][] matrix) {
-        int x = 0;
-        int y = 0;
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[i].length; j++) {
-                if (matrix[i][j] == 'S') {
-                    x = i;
-                    y = j;
-                }
-            }
-        }
-        Node source = new Node(x, y, 0, 'a');
+        Node source = getNode(matrix);
         HashSet<Node> queue = new HashSet<>();
 
         int numOfRows = matrix.length;
@@ -41,6 +31,20 @@ class Dikstra {
         }
 
         return -1;
+    }
+
+    private static Node getNode(char[][] matrix) {
+        int x = 0;
+        int y = 0;
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                if (matrix[i][j] == 'S') {
+                    x = i;
+                    y = j;
+                }
+            }
+        }
+        return new Node(x, y, 0, 'a');
     }
 
     private static List<Node> addNeighbours(Node poped, char[][] matrix, final int numOfRows, final int numOfColumns) {
